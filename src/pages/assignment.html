@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufgaben Übersicht</title>
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Assignment Center 2.0</h1>
+        <nav>
+            <a href="../main.html">Home</a>
+            <a href="assignment.html">Aufgaben</a>
+            <a href="profile.html">Profil</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Aufgaben Übersicht</h2>
+        <p id="facultyName" class="faculty-display"></p>
+
+        <!-- Aufgaben-Tabelle -->
+        <table id="assignmentTable">
+            <thead>
+                <tr>
+                    <th>Name des Projekts</th>
+                    <th>Name vom Studenten</th>
+                    <th>Zeit</th>
+                    <th>Status</th>
+                    <th>Dateiname</th>
+                    <th>Anzahl der Punkte</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Projekt 1</td>
+                    <td>Max Mustermann</td>
+                    <td>5 Stunden</td>
+                    <td>Fertig</td>
+                    <td>projekt1.pdf</td>
+                    <td>85</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Bereich zum Hochladen eines neuen Assignments -->
+        <div class="upload-section">
+            <h3>Neues Assignment hochladen</h3>
+            <form id="assignmentForm">
+                <label for="projectName">Projektname:</label>
+                <input type="text" id="projectName" name="projectName" required>
+
+                <label for="studentName">Name des Studenten:</label>
+                <input type="text" id="studentName" name="studentName" required>
+
+                <label for="timeSpent">Zeit (in Stunden):</label>
+                <input type="number" id="timeSpent" name="timeSpent" min="0" required>
+
+                <label for="fileUpload">Datei hochladen (PDF):</label>
+                <input type="file" id="fileUpload" accept=".pdf" required>
+                <p id="fileNameDisplay" style="font-size: 0.9rem; color: #555;"></p>
+
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="Fertig">Fertig</option>
+                    <option value="Nicht fertig">Nicht fertig</option>
+                    <option value="Abgegeben">Abgegeben</option>
+                </select>
+
+                <button type="submit">Hochladen</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Assignment Center | Alle Rechte vorbehalten</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Fakultät aus URL auslesen
+        const urlParams = new URLSearchParams(window.location.search);
+        const faculty = urlParams.get("faculty");
+
+        const facultyNameMap = {
+            engineering: "Ingenieurwissenschaften",
+            business: "Wirtschaftswissenschaften",
+            law: "Rechtswissenschaften",
+            medicine: "Medizin",
+            arts: "Geisteswissenschaften"
+        };
+
+        const facultyDisplay = facultyNameMap[faculty] || "Keine Fakultät ausgewählt";
+        document.getElementById("facultyName").innerText = "Fakultät: " + facultyDisplay;
+
+        // Dateiname anzeigen
+        const fileUpload = document.getElementById("fileUpload");
+        fileUpload.addEventListener("change", function () {
+            const file = this.files[0];
+            if (file) {
+                document.getElementById("fileNameDisplay").innerText = "Ausgewählte Datei: " + file.name;
+            } else {
+                document.getElementById("fileNameDisplay").innerText = "";
+            }
+        });
+
+        // Formular-Submit: Neue Zeile zur Tabelle hinzufügen
+        document.getElementById("assignmentForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Eingabewerte sammeln
+            const projectName = document.getElementById("projectName").value;
+            const studentName = document.getElementById("studentName").value;
+            const timeSpent = document.getElementById("timeSpent").value;
+            const status = document.getElementById("status").value;
+            const fileName = fileUpload.files[0] ? fileUpload.files[0].name : "Keine Datei";
+
+            // Neue Zeile erstellen
+            const table = document.getElementById("assignmentTable").getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            // Zellen hinzufügen
+            newRow.insertCell(0).innerText = projectName;
+            newRow.insertCell(1).innerText = studentName;
+            newRow.insertCell(2).innerText = timeSpent + " Stunden";
+            newRow.insertCell(3).innerText = status;
+            newRow.insertCell(4).innerText = fileName;
+            newRow.insertCell(5).innerText = "--"; // Punkte-Feld bleibt leer
+
+            // Formular zurücksetzen
+            document.getElementById("assignmentForm").reset();
+            document.getElementById("fileNameDisplay").innerText = "";
+        });
+    </script>
+</body>
+</html>

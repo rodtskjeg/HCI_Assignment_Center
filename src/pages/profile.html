@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Assignment Center 2.0</title>
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Assignment Center 2.0</h1>
+        <nav>
+            <a href="../main.html">Home</a>
+            <a href="tasks.html">Aufgaben</a>
+            <a href="profile.html">Profil</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Mein Profil</h2>
+        <div class="profile-container">
+            <!-- Profilbild -->
+            <div class="profile-picture">
+                <img id="profileImg" src="default-avatar.png" alt="Profilbild">
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+
+            <!-- Profilinformationen -->
+            <form id="profileForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" value="Max Mustermann">
+
+                <label for="status">Status:</label>
+                <select id="status">
+                    <option value="student" selected>Student</option>
+                    <option value="tutor">Tutor</option>
+                </select>
+
+                <label for="description">Beschreibung:</label>
+                <textarea id="description">Ich bin ein Student und arbeite an verschiedenen Projekten.</textarea>
+
+                <button type="submit" id="saveBtn">Änderungen speichern</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Assignment Center</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Profilbild ändern
+        const fileInput = document.getElementById("fileInput");
+        const profileImg = document.getElementById("profileImg");
+
+        fileInput.addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImg.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Profil speichern (für den Prototypen)
+        const saveBtn = document.getElementById("saveBtn");
+
+        saveBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const status = document.getElementById("status").value;
+            const description = document.getElementById("description").value;
+
+            // Hier können die Daten gespeichert werden, z.B. in localStorage oder im Backend
+            alert(`Profil gespeichert:\nName: ${name}\nStatus: ${status}\nBeschreibung: ${description}`);
+        });
+    </script>
+</body>
+</html>

@@ -10,6 +10,6 @@ document
       alert("Bitte Benutzername und Passwort eingeben!");
     } else {
       alert("Login erfolgreich! Du wirst weitergeleitet...");
-      window.location.href = "../pages/Main.html";
+      window.location.href = "../pages/main.html";
     }
   });
