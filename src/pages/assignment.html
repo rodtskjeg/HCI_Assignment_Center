@@ -9,11 +9,12 @@
 <body>
     <!-- Header -->
     <header>
-        <h1>Assignment Center 2.0</h1>
+        <h1 id="headerTitle">Assignment Center 2.0</h1>
         <nav>
-            <a href="../main.html">Home</a>
-            <a href="assignment.html">Aufgaben</a>
-            <a href="profile.html">Profil</a>
+            <a href="../pages/main.html">Home</a>
+            <a href="../pages/assignment.html">Aufgaben</a>
+            <a href="../pages/profile.html">Profil</a>
+            <a href="../../pages/login.html">Abmelden</a>
         </nav>
     </header>
 
@@ -82,9 +83,8 @@
 
     <!-- JavaScript -->
     <script>
-        // Fakultät aus URL auslesen
-        const urlParams = new URLSearchParams(window.location.search);
-        const faculty = urlParams.get("faculty");
+        // Fakultät aus localStorage auslesen
+        const selectedFaculty = localStorage.getItem("selectedFaculty");
 
         const facultyNameMap = {
             engineering: "Ingenieurwissenschaften",
@@ -94,8 +94,18 @@
             arts: "Geisteswissenschaften"
         };
 
-        const facultyDisplay = facultyNameMap[faculty] || "Keine Fakultät ausgewählt";
+        // Fakultätsnamen übersetzen und anzeigen
+        const facultyDisplay = selectedFaculty
+            ? facultyNameMap[selectedFaculty] || "Keine Fakultät ausgewählt"
+            : "Keine Fakultät ausgewählt";
+
         document.getElementById("facultyName").innerText = "Fakultät: " + facultyDisplay;
+
+        // Fakultät auch im Header-Titel anzeigen
+        const headerTitle = document.getElementById("headerTitle");
+        headerTitle.textContent += selectedFaculty
+            ? ` - ${facultyDisplay}`
+            : "";
 
         // Dateiname anzeigen
         const fileUpload = document.getElementById("fileUpload");

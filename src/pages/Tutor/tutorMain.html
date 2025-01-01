@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment Center 2.0</title>
+    <link rel="stylesheet" href="../../styles/main.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Assignment Center 2.0 (Tutor Page)</h1>
+      <nav>
+        <a href="../Tutor/tutorMain.html">Home</a>
+        <a href="../Tutor/profileTutor.html">Profil</a>
+        <a href="../../pages/login.html">Abmelden</a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <h2>Willkommen im Assignment Center</h2>
+      <p>Aufgaben welcher Fakultät wollen Sie überprüfen?</p>
+
+      <!-- Fakultäten-Auswahl -->
+      <div class="faculty-selection">
+        <label for="faculty">Wähle deine Fakultät:</label>
+        <select id="faculty">
+          <option value="">-- Fakultät auswählen --</option>
+          <option value="engineering">Ingenieurwissenschaften</option>
+          <option value="business">Wirtschaftswissenschaften</option>
+          <option value="law">Rechtswissenschaften</option>
+          <option value="medicine">Medizin</option>
+          <option value="arts">Geisteswissenschaften</option>
+        </select>
+        <button id="submitBtn">Submit</button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Assignment Center</p>
+    </footer>
+
+    <script src="../../scripts/mainTutor.js"></script>
+  </body>
+</html>

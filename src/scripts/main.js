@@ -4,7 +4,10 @@ document.getElementById("submitBtn").addEventListener("click", function () {
   if (faculty === "") {
     alert("Bitte wähle eine Fakultät aus!");
   } else {
-    // Weiterleitung zu einer spezifischen Seite basierend auf der Fakultät
+    // Fakultät im localStorage speichern
+    localStorage.setItem("selectedFaculty", faculty);
+
+    // Weiterleitung zur Assignment-Seite
     window.location.href = `../pages/assignment.html`;
   }
 });

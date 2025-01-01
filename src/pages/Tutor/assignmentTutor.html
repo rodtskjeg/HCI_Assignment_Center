@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aufgaben Übersicht</title>
+    <link rel="stylesheet" href="../../styles/main.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1 id="headerTitle">Assignment Center 2.0</h1>
+      <nav>
+        <a href="../Tutor/tutorMain.html">Home</a>
+        <a href="../Tutor/assignmentTutor.html">Aufgaben</a>
+        <a href="../Tutor/profileTutor.html">Profil</a>
+        <a href="../../pages/login.html">Abmelden</a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <h2>Aufgaben Übersicht</h2>
+      <p id="facultyName" class="faculty-display"></p>
+
+      <!-- Aufgaben-Tabelle -->
+      <table id="assignmentTable">
+        <thead>
+          <tr>
+            <th>Name des Projekts</th>
+            <th>Name vom Studenten</th>
+            <th>Zeit</th>
+            <th>Status</th>
+            <th>Dateiname</th>
+            <th>Anzahl der Punkte</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="row-projekt-a">
+            <td>Projekt A</td>
+            <td>Max Mustermann</td>
+            <td>10 Stunden</td>
+            <td>
+              <span
+                class="status-label nicht-fertig"
+                id="status-projekt-a"
+                data-status="Nicht bearbeitet"
+                >Nicht bearbeitet</span
+              >
+            </td>
+            <td>
+              <a
+                href="../../public/Thinking.pdf"
+                download="Projekt A - Max Mustermann.pdf"
+                >Projekt A - Datei</a
+              >
+            </td>
+            <td id="points-projekt-a">--</td>
+          </tr>
+          <tr id="row-projekt-b">
+            <td>Projekt B</td>
+            <td>Lisa Müller</td>
+            <td>8 Stunden</td>
+            <td>
+              <span
+                class="status-label nicht-fertig"
+                id="status-projekt-b"
+                data-status="Nicht bearbeitet"
+                >Nicht bearbeitet</span
+              >
+            </td>
+            <td>
+              <a
+                href="../../public/Thinking.pdf"
+                download="Projekt B - Lisa Müller.pdf"
+                >Projekt B - Datei</a
+              >
+            </td>
+            <td id="points-projekt-b">--</td>
+          </tr>
+          <tr id="row-projekt-c">
+            <td>Projekt C</td>
+            <td>John Doe</td>
+            <td>15 Stunden</td>
+            <td>
+              <span
+                class="status-label im-prozess"
+                id="status-projekt-c"
+                data-status="Im Prozess"
+                >Im Prozess</span
+              >
+            </td>
+            <td>
+              <a
+                href="../../public/Thinking.pdf"
+                download="Projekt C - John Doe.pdf"
+                >Projekt C - Datei</a
+              >
+            </td>
+            <td id="points-projekt-c">--</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Verstecktes Formular -->
+      <div id="uploadSection" style="display: none; margin-top: 20px">
+        <h3>Bearbeitung abschließen</h3>
+        <form id="updateForm">
+          <label for="projectSelect">Projekt auswählen:</label>
+          <select id="projectSelect" required>
+            <option value="Projekt A">Projekt A</option>
+            <option value="Projekt B">Projekt B</option>
+            <option value="Projekt C">Projekt C</option>
+          </select>
+
+          <label for="points">Punkte eingeben:</label>
+          <input type="number" id="points" min="0" max="100" required />
+
+          <label for="fileUpload">Bearbeitete Datei hochladen:</label>
+          <input type="file" id="fileUpload" accept=".pdf" required />
+
+          <button type="submit">Aktualisieren</button>
+        </form>
+      </div>
+
+      <!-- Button zum Anzeigen des Formulars -->
+      <button id="toggleFormButton" style="margin-top: 20px">
+        Bearbeitete Datei hochladen
+      </button>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Assignment Center | Alle Rechte vorbehalten</p>
+    </footer>
+
+    <script>
+      // JavaScript für Interaktionen
+      document
+        .getElementById("toggleFormButton")
+        .addEventListener("click", () => {
+          const uploadSection = document.getElementById("uploadSection");
+          uploadSection.style.display =
+            uploadSection.style.display === "none" ? "block" : "none";
+        });
+
+      document
+        .getElementById("updateForm")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          const project = document.getElementById("projectSelect").value;
+          const points = document.getElementById("points").value;
+
+          // Status und Punkte der entsprechenden Zeile aktualisieren
+          const statusCell = document.getElementById(
+            `status-${project.toLowerCase().replace(/\s+/g, "-")}`
+          );
+          const pointsCell = document.getElementById(
+            `points-${project.toLowerCase().replace(/\s+/g, "-")}`
+          );
+          const row = document.getElementById(
+            `row-${project.toLowerCase().replace(/\s+/g, "-")}`
+          );
+
+          // Wenn der Status nicht "Fertig" ist, setze ihn auf "Fertig"
+          if (statusCell.dataset.status !== "Fertig") {
+            statusCell.textContent = "Fertig";
+            statusCell.dataset.status = "Fertig";
+            statusCell.classList.remove("nicht-fertig", "abgegeben");
+            statusCell.classList.add("fertig");
+          }
+
+          // Die Punkte in der Tabelle aktualisieren
+          pointsCell.textContent = `${points} Punkte`;
+
+          // Feedback anzeigen und Formular zurücksetzen
+          alert(`${project} wurde erfolgreich aktualisiert!`);
+          document.getElementById("updateForm").reset();
+          document.getElementById("uploadSection").style.display = "none";
+        });
+    </script>
+  </body>
+</html>
