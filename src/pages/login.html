@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <!-- Verknüpft das Stylesheet für das Design der Login-Seite -->
     <link rel="stylesheet" href="../styles/main.css">
 </head>
 <body class="login-sec">
+    <!-- Container für das Login-Formular -->
     <div class="login-container">
         <h2>Login</h2>
+        <!-- Das Login-Formular -->
         <form id="loginForm">
+            <!-- Eingabefeld für den Benutzernamen -->
             <label for="username">Benutzername:</label>
             <input type="text" id="username" placeholder="Gib deinen Benutzernamen ein" required>
 
+            <!-- Eingabefeld für das Passwort -->
             <label for="password">Passwort:</label>
             <input type="password" id="password" placeholder="Gib dein Passwort ein" required>
 
-            <button type="submit">Login</button>
+            <!-- Login-Button -->
+            <div class="b-container"><button type="submit">Login</button></div>
         </form>
     </div>
 
+    <!-- Verknüpft die JavaScript-Datei, die das Login-Verhalten steuert -->
     <script src="../scripts/login.js"></script>
 </body>
 </html>

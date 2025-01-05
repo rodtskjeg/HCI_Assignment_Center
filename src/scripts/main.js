@@ -2,7 +2,6 @@ document.getElementById("submitBtn").addEventListener("click", function () {
   const faculty = document.getElementById("faculty").value;
 
   if (faculty === "") {
-    alert("Bitte wähle eine Fakultät aus!");
   } else {
     // Fakultät im localStorage speichern
     localStorage.setItem("selectedFaculty", faculty);

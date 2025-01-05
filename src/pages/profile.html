@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profil - Assignment Center 2.0</title>
+    <!-- Verknüpfung mit der externen CSS-Datei für das Styling -->
     <link rel="stylesheet" href="../styles/main.css" />
   </head>
   <body>
@@ -11,9 +12,10 @@
     <header>
       <h1>Assignment Center 2.0</h1>
       <nav>
+        <!-- Navigation mit Links zu verschiedenen Seiten -->
         <a href="../pages/main.html">Home</a>
-            <a href="../pages/profile.html">Profil</a>
-            <a href="../pages/login.html">Abmelden</a>
+        <a href="../pages/profile.html">Profil</a>
+        <a href="../pages/login.html">Abmelden</a>
       </nav>
     </header>
 
@@ -23,32 +25,40 @@
       <div class="profile-container">
         <!-- Profilbild -->
         <div class="profile-pic-con">
+          <!-- Container für das Profilbild -->
           <div class="profile-picture">
+            <!-- Das Profilbild wird hier angezeigt -->
             <img
               id="profileImg"
               src="../../public/no-user.png"
               alt="Profilbild"
             />
           </div>
+          <!-- Eingabefeld für das Hochladen eines neuen Profilbildes -->
           <input type="file" id="fileInput" accept="image/*" />
         </div>
 
-        <!-- Profilinformationen -->
+        <!-- Profilinformationen (Formular) -->
         <form id="profileForm">
+          <!-- Name des Benutzers -->
           <label for="name">Name:</label>
           <input type="text" id="name" value="Max Mustermann" />
 
+          <!-- Status des Benutzers (Student oder Tutor) -->
           <label for="status">Status:</label>
           <select id="status">
             <option value="student" selected>Student</option>
+            <!-- Standardmäßig als Student ausgewählt -->
             <option value="tutor">Tutor</option>
           </select>
 
+          <!-- Beschreibung des Benutzers -->
           <label for="description">Beschreibung:</label>
           <textarea id="description">
 Ich bin ein Student und arbeite an verschiedenen Projekten.</textarea
           >
 
+          <!-- Button zum Speichern der Änderungen -->
           <button type="submit" id="saveBtn">Änderungen speichern</button>
         </form>
       </div>
@@ -61,35 +71,36 @@ Ich bin ein Student und arbeite an verschiedenen Projekten.</textarea
 
     <!-- JavaScript -->
     <script>
-      // Profilbild ändern
+      // Funktion, um das Profilbild zu ändern
       const fileInput = document.getElementById("fileInput");
       const profileImg = document.getElementById("profileImg");
 
       fileInput.addEventListener("change", function (event) {
-        const file = event.target.files[0];
+        const file = event.target.files[0]; // Das ausgewählte Bild
         if (file) {
-          const reader = new FileReader();
+          // Wenn ein Bild ausgewählt wurde
+          const reader = new FileReader(); // Erstellen eines FileReaders
           reader.onload = function (e) {
-            profileImg.src = e.target.result;
-            // Entfernen des Standardbilds, wenn ein neues Bild ausgewählt wird
+            profileImg.src = e.target.result; // Setzt das Bild auf das ausgewählte Bild
+            // Entfernen des Standardbilds und Anzeigen des neuen Bilds
             profileImg.style.display = "block";
           };
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(file); // Liest das Bild als Data-URL
         } else {
-          // Wenn kein Bild gewählt wird, zeigt das Standardbild an
+          // Wenn kein Bild ausgewählt wurde, setze das Standardbild zurück
           profileImg.src = "default-avatar.png";
           profileImg.style.display = "none"; // Standardbild wird verborgen
         }
       });
 
-      // Profil speichern (für den Prototypen)
+      // Funktion, um die Profiländerungen zu speichern
       const saveBtn = document.getElementById("saveBtn");
 
       saveBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        const name = document.getElementById("name").value;
-        const status = document.getElementById("status").value;
-        const description = document.getElementById("description").value;
+        event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
+        const name = document.getElementById("name").value; // Name aus dem Formular
+        const status = document.getElementById("status").value; // Status aus dem Dropdown
+        const description = document.getElementById("description").value; // Beschreibung aus dem Textfeld
 
         // Hier können die Daten gespeichert werden, z.B. in localStorage oder im Backend
         alert(

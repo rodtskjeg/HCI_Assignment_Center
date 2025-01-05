@@ -1,6 +1,7 @@
 // Fakultät aus localStorage auslesen
 const selectedFaculty = localStorage.getItem("selectedFaculty");
 
+// Map für die Übersetzung der Fakultäten
 const facultyNameMap = {
   engineering: "Ingenieurwissenschaften",
   business: "Wirtschaftswissenschaften",
@@ -14,6 +15,7 @@ const facultyDisplay = selectedFaculty
   ? facultyNameMap[selectedFaculty] || "Keine Fakultät ausgewählt"
   : "Keine Fakultät ausgewählt";
 
+// Fakultät im HTML anzeigen
 document.getElementById("facultyName").innerText =
   "Fakultät: " + facultyDisplay;
 
@@ -21,14 +23,16 @@ document.getElementById("facultyName").innerText =
 const headerTitle = document.getElementById("headerTitle");
 headerTitle.textContent += selectedFaculty ? ` - ${facultyDisplay}` : "";
 
-// Dateiname anzeigen
+// Dateiname anzeigen, wenn eine Datei hochgeladen wird
 const fileUpload = document.getElementById("fileUpload");
 fileUpload.addEventListener("change", function () {
   const file = this.files[0];
   if (file) {
+    // Zeigt den Namen der ausgewählten Datei an
     document.getElementById("fileNameDisplay").innerText =
       "Ausgewählte Datei: " + file.name;
   } else {
+    // Wenn keine Datei ausgewählt wurde, wird das Textfeld zurückgesetzt
     document.getElementById("fileNameDisplay").innerText = "";
   }
 });
@@ -48,27 +52,28 @@ document
       ? fileUpload.files[0].name
       : "Keine Datei";
 
-    // Neue Zeile erstellen
+    // Neue Zeile für die Tabelle erstellen
     const table = document
       .getElementById("assignmentTable")
       .getElementsByTagName("tbody")[0];
     const newRow = table.insertRow();
 
-    // Zellen hinzufügen
+    // Zellen für die verschiedenen Spalten der neuen Zeile hinzufügen
     newRow.insertCell(0).innerText = projectName;
     newRow.insertCell(1).innerText = studentName;
     newRow.insertCell(2).innerText = timeSpent + " Stunden";
 
-    // Status mit farblichem Label
+    // Status-Zelle mit farblichem Label hinzufügen
     const statusCell = newRow.insertCell(3);
     statusCell.innerHTML = `<span class="status-label ${status
       .toLowerCase()
       .replace(" ", "-")}">${status}</span>`;
 
+    // Dateiname und Punkte-Feld
     newRow.insertCell(4).innerText = fileName;
     newRow.insertCell(5).innerText = "--"; // Punkte-Feld bleibt leer
 
-    // Formular zurücksetzen
+    // Formular zurücksetzen nach dem Hinzufügen der neuen Zeile
     document.getElementById("assignmentForm").reset();
     document.getElementById("fileNameDisplay").innerText = "";
   });

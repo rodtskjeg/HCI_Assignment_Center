@@ -13,7 +13,7 @@ body {
 header {
   background-color: #0077cc;
   color: white;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,7 +21,7 @@ header {
 
 header h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 header nav a {
@@ -46,7 +46,10 @@ header nav a:hover {
 
 .login-container {
   background: white;
-  padding: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 300px;
@@ -54,7 +57,7 @@ header nav a:hover {
 
 h2 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 label {
@@ -63,11 +66,16 @@ label {
 }
 
 input {
-  width: 100%;
+  width: 94%;
   padding: 0.5rem;
   margin-top: 0.3rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.b-container {
+  display: flex;
+  align-items: center;
 }
 
 button {
@@ -96,7 +104,7 @@ main {
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Verhindert Überlauf */
+  overflow: hidden;
 }
 h2 {
   text-align: center;
@@ -168,7 +176,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1.5rem;
-  table-layout: fixed; /* Verhindert, dass Zellen breiter werden */
+  table-layout: fixed;
 }
 
 table th,
@@ -176,9 +184,9 @@ table td {
   padding: 1rem;
   border: 1px solid #ddd;
   text-align: center;
-  word-wrap: break-word; /* Bricht lange Wörter in der Zelle */
-  overflow-wrap: break-word; /* Alternative für moderne Browser */
-  white-space: normal; /* Bricht Text um */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 table th {
@@ -221,16 +229,17 @@ table tr:hover {
 /* PROFIL */
 
 /* Standard-Stil für das Profilbild */
-.profile-pic-con{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.profile-pic-con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile-picture {
   width: 100px;
   height: 100px;
-  border-radius: 50%; /* Macht das Bild rund */
+  margin-bottom: 2rem;
+  border-radius: 50%;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -245,7 +254,7 @@ table tr:hover {
 
 /* Wenn kein Bild vorhanden ist, wird die Violette Farbe verwendet */
 .profile-picture img[src="default-avatar.png"] {
-  display: none; /* Versteckt das Standardbild */
+  display: none;
 }
 
 /* FOOTER */
