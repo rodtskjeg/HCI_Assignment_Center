@@ -35,6 +35,27 @@ header nav a:hover {
   text-decoration: underline;
 }
 
+.chat-tutor-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#chatTutorBtn {
+  font-size: 16px;
+  background: #f1ab41;
+  width: fit-content;
+  padding: 2rem, 2rem;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#chatTutorBtn:hover {
+  background-color: #0056b3;
+}
+
 /* LOGIN */
 
 .login-sec {
@@ -58,6 +79,7 @@ header nav a:hover {
 h2 {
   text-align: center;
   margin-bottom: 0.9rem;
+  color: #0077cc;
 }
 
 label {
@@ -96,6 +118,28 @@ button:hover {
 
 /* FACULTY */
 
+.faculty-info {
+  display: none;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.faculty-info img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+}
+
+.faculty-info h3 {
+  margin-top: 10px;
+}
+
+.faculty-info p {
+  margin-top: 5px;
+}
+
 main {
   flex-grow: 1;
   max-width: 900px;
@@ -106,12 +150,6 @@ main {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
-h2 {
-  text-align: center;
-  color: #0077cc;
-  margin-bottom: 1rem;
-}
-
 /* Fak Auswahl */
 .faculty-selection {
   margin: 2rem auto;
@@ -203,6 +241,32 @@ table tr:hover {
   background-color: #f1f1f1;
 }
 
+.fas {
+  margin-right: 0.5rem;
+}
+
+.button-container button {
+  width: fit-content;
+  padding: 1rem, 2rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: right;
+  gap: 20px;
+}
+
+/* SHOW RAUM */
+
+.room-photo img {
+  height: 150px;
+  border-radius: 15px;
+}
+
+#showRoomInfoBtn {
+  background: #5c5c5c;
+}
+
 /* TUTOR */
 
 /* Status Labels Tutor */
@@ -224,6 +288,31 @@ table tr:hover {
 
 .status-label.im-prozess {
   background-color: #ffc107;
+}
+
+/* Stil für den Button mit Nachrichtenanzahl */
+#chatButton {
+  position: relative;
+  padding: 10px 20px;
+  background: #f1ab41;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#chatButton .message-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* PROFIL */
@@ -255,6 +344,79 @@ table tr:hover {
 /* Wenn kein Bild vorhanden ist, wird die Violette Farbe verwendet */
 .profile-picture img[src="default-avatar.png"] {
   display: none;
+}
+
+/* CHAT */
+
+.chat-container {
+  max-width: 800px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+}
+
+.chat-window {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.chat-message {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.chat-message.student {
+  background-color: #237add;
+  align-self: flex-start;
+  color: #ffffff;
+  padding: 1rem;
+}
+
+.chat-message.tutor {
+  background-color: #c109f0;
+  align-self: flex-end;
+  color: #ffffff;
+  padding: 1rem;
+}
+
+.message-author {
+  font-weight: bold;
+}
+
+.chat-input-area {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.chat-input-area button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.chat-input-area button:hover {
+  background-color: #0056b3;
 }
 
 /* FOOTER */

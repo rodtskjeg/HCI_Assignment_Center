@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aufgaben Übersicht</title>
-    <!-- Verlinkung zum Stylesheet für das Layout -->
     <link rel="stylesheet" href="../../styles/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
-    <!-- Header mit Navigation -->
     <header>
       <h1 id="headerTitle">Assignment Center 2.0</h1>
       <nav>
-        <!-- Navigationslinks zu den verschiedenen Tutor-Seiten -->
         <a href="../Tutor/tutorMain.html">Home</a>
         <a href="../Tutor/assignmentTutor.html">Aufgaben</a>
         <a href="../Tutor/profileTutor.html">Profil</a>
@@ -20,12 +21,10 @@
       </nav>
     </header>
 
-    <!-- Main Content (Hauptinhalt) -->
     <main>
       <h2>Aufgaben Übersicht</h2>
       <p id="facultyName" class="faculty-display"></p>
 
-      <!-- Tabelle zur Anzeige von Aufgaben -->
       <table id="assignmentTable">
         <thead>
           <tr>
@@ -38,13 +37,11 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Beispiel-Daten für Projekte und deren Status -->
           <tr id="row-projekt-a">
             <td>Projekt A</td>
             <td>Max Mustermann</td>
             <td>10 Stunden</td>
             <td>
-              <!-- Status des Projekts: Noch nicht bearbeitet -->
               <span
                 class="status-label nicht-fertig"
                 id="status-projekt-a"
@@ -53,7 +50,6 @@
               >
             </td>
             <td>
-              <!-- Link zum Download der Datei für Projekt A -->
               <a
                 href="../../../public/Thinking.pdf"
                 download="Projekt A - Max Mustermann.pdf"
@@ -67,7 +63,6 @@
             <td>Lisa Müller</td>
             <td>8 Stunden</td>
             <td>
-              <!-- Status des Projekts: Noch nicht bearbeitet -->
               <span
                 class="status-label nicht-fertig"
                 id="status-projekt-b"
@@ -76,7 +71,6 @@
               >
             </td>
             <td>
-              <!-- Link zum Download der Datei für Projekt B -->
               <a
                 href="../../public/Thinking.pdf"
                 download="Projekt B - Lisa Müller.pdf"
@@ -90,7 +84,6 @@
             <td>John Doe</td>
             <td>15 Stunden</td>
             <td>
-              <!-- Status des Projekts: In Bearbeitung -->
               <span
                 class="status-label im-prozess"
                 id="status-projekt-c"
@@ -99,7 +92,6 @@
               >
             </td>
             <td>
-              <!-- Link zum Download der Datei für Projekt C -->
               <a
                 href="../../public/Thinking.pdf"
                 download="Projekt C - John Doe.pdf"
@@ -111,11 +103,9 @@
         </tbody>
       </table>
 
-      <!-- Verstecktes Formular zum Bearbeiten der Aufgaben -->
       <div id="uploadSection" style="display: none; margin-top: 20px">
         <h3>Bearbeitung abschließen</h3>
         <form id="updateForm">
-          <!-- Dropdown zur Auswahl des Projekts -->
           <label for="projectSelect">Projekt auswählen:</label>
           <select id="projectSelect" required>
             <option value="Projekt A">Projekt A</option>
@@ -123,15 +113,12 @@
             <option value="Projekt C">Projekt C</option>
           </select>
 
-          <!-- Eingabefeld für die Punktezahl -->
           <label for="points">Punkte eingeben:</label>
           <input type="number" id="points" min="0" max="100" required />
 
-          <!-- Eingabefeld für die Kommentare -->
-          <label for="points">Kommentare:</label>
-          <input type="text" id="comment"/>
+          <label for="comment">Kommentare:</label>
+          <input type="text" id="comment" />
 
-          <!-- Eingabefeld zum Hochladen der bearbeiteten Datei -->
           <label for="fileUpload">Bearbeitete Datei hochladen:</label>
           <input type="file" id="fileUpload" accept=".pdf" required />
 
@@ -139,30 +126,33 @@
         </form>
       </div>
 
-      <!-- Button zum Anzeigen des Formulars zum Bearbeiten -->
-      <button id="toggleFormButton" style="margin-top: 20px">
-        Bearbeitete Datei hochladen
-      </button>
+      <div class="button-container">
+        <button id="toggleFormButton" style="margin-top: 20px">
+          Bearbeitete Datei hochladen
+        </button>
+
+        <a href="../Tutor/chatWithStudent.html">
+          <button id="chatButton" style="margin-top: 20px">
+            Chat
+            <span id="newMessagesCount" class="message-count">3</span>
+          </button>
+        </a>
+      </div>
     </main>
 
-    <!-- Footer mit Copyright -->
     <footer>
       <p>&copy; 2024 Assignment Center | Alle Rechte vorbehalten</p>
     </footer>
 
-    <!-- JavaScript für Interaktionen -->
     <script>
-      // Klick-Event für den Button, der das Formular anzeigt oder verbirgt
       document
         .getElementById("toggleFormButton")
         .addEventListener("click", () => {
           const uploadSection = document.getElementById("uploadSection");
-          // Toggle Sichtbarkeit des Formulars
           uploadSection.style.display =
             uploadSection.style.display === "none" ? "block" : "none";
         });
 
-      // Event-Listener für das Absenden des Formulars
       document
         .getElementById("updateForm")
         .addEventListener("submit", (event) => {
@@ -170,7 +160,6 @@
           const project = document.getElementById("projectSelect").value;
           const points = document.getElementById("points").value;
 
-          // Status und Punkte der entsprechenden Zeile in der Tabelle aktualisieren
           const statusCell = document.getElementById(
             `status-${project.toLowerCase().replace(/\s+/g, "-")}`
           );
@@ -181,7 +170,6 @@
             `row-${project.toLowerCase().replace(/\s+/g, "-")}`
           );
 
-          // Wenn der Status noch nicht "Fertig" ist, setze ihn auf "Fertig"
           if (statusCell.dataset.status !== "Fertig") {
             statusCell.textContent = "Fertig";
             statusCell.dataset.status = "Fertig";
@@ -189,10 +177,8 @@
             statusCell.classList.add("fertig");
           }
 
-          // Die Punkte in der Tabelle aktualisieren
           pointsCell.textContent = `${points} Punkte`;
 
-          // Erfolgsnachricht anzeigen und Formular zurücksetzen
           alert(`${project} wurde erfolgreich aktualisiert!`);
           document.getElementById("updateForm").reset();
           document.getElementById("uploadSection").style.display = "none";

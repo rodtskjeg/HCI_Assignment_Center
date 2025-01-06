@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profil - Assignment Center 2.0</title>
+    <!-- Verknüpfung mit der externen CSS-Datei für das Styling -->
     <link rel="stylesheet" href="../../styles/main.css" />
   </head>
   <body>
@@ -11,6 +12,7 @@
     <header>
       <h1>Assignment Center 2.0 (Tutor)</h1>
       <nav>
+        <!-- Navigation mit Links zu verschiedenen Seiten -->
         <a href="../Tutor/tutorMain.html">Home</a>
         <a href="../Tutor/profileTutor.html">Profil</a>
         <a href="../../pages/login.html">Abmelden</a>
@@ -23,32 +25,51 @@
       <div class="profile-container">
         <!-- Profilbild -->
         <div class="profile-pic-con">
+          <!-- Container für das Profilbild -->
           <div class="profile-picture">
+            <!-- Das Profilbild wird hier angezeigt -->
             <img
               id="profileImg"
               src="../../../public/no-user.png"
               alt="Profilbild"
             />
           </div>
+          <!-- Eingabefeld für das Hochladen eines neuen Profilbildes -->
           <input type="file" id="fileInput" accept="image/*" />
         </div>
 
-        <!-- Profilinformationen -->
+        <!-- Profilinformationen (Formular) -->
         <form id="profileForm">
+          <!-- Name des Benutzers -->
           <label for="name">Name:</label>
           <input type="text" id="name" value="Max Mustermann" />
 
+          <!-- E-Mail des Benutzers -->
+          <label for="email">E-Mail:</label>
+          <input type="email" id="email" value="max@tutor.com" />
+
+          <!-- Telefon des Benutzers -->
+          <label for="phone">Telefon:</label>
+          <input type="tel" id="phone" value="+49 123 4567890" />
+
+          <!-- Fakultät des Benutzers -->
+          <label for="faculty">Fakultät:</label>
+          <input type="text" id="faculty" value="Informatik-Tutor" />
+
+          <!-- Status des Benutzers (Student oder Tutor) -->
           <label for="status">Status:</label>
           <select id="status">
             <option value="student" selected>Student</option>
             <option value="tutor">Tutor</option>
           </select>
 
+          <!-- Beschreibung des Benutzers -->
           <label for="description">Beschreibung:</label>
           <textarea id="description">
 Ich bin ein Student und arbeite an verschiedenen Projekten.</textarea
           >
 
+          <!-- Button zum Speichern der Änderungen -->
           <button type="submit" id="saveBtn">Änderungen speichern</button>
         </form>
       </div>
@@ -61,33 +82,37 @@ Ich bin ein Student und arbeite an verschiedenen Projekten.</textarea
 
     <!-- JavaScript -->
     <script>
-      // Profilbild ändern
+      // Funktion, um das Profilbild zu ändern
       const fileInput = document.getElementById("fileInput");
       const profileImg = document.getElementById("profileImg");
 
       fileInput.addEventListener("change", function (event) {
-        const file = event.target.files[0];
+        const file = event.target.files[0]; // Das ausgewählte Bild
         if (file) {
-          const reader = new FileReader();
+          // Wenn ein Bild ausgewählt wurde
+          const reader = new FileReader(); // Erstellen eines FileReaders
           reader.onload = function (e) {
-            profileImg.src = e.target.result;
-            // Entfernen des Standardbilds, wenn ein neues Bild ausgewählt wird
+            profileImg.src = e.target.result; // Setzt das Bild auf das ausgewählte Bild
+            // Entfernen des Standardbilds und Anzeigen des neuen Bilds
             profileImg.style.display = "block";
           };
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(file); // Liest das Bild als Data-URL
         } else {
-          // Wenn kein Bild gewählt wird, zeigt das Standardbild an
+          // Wenn kein Bild ausgewählt wurde, setze das Standardbild zurück
           profileImg.src = "default-avatar.png";
           profileImg.style.display = "none"; // Standardbild wird verborgen
         }
       });
 
-      // Profil speichern (für den Prototypen)
+      // Funktion, um die Profiländerungen zu speichern
       const saveBtn = document.getElementById("saveBtn");
 
       saveBtn.addEventListener("click", function (event) {
-        event.preventDefault();
+        event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
         const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const faculty = document.getElementById("faculty").value;
         const status = document.getElementById("status").value;
         const description = document.getElementById("description").value;
 

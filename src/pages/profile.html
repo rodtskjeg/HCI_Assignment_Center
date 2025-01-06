@@ -44,11 +44,22 @@
           <label for="name">Name:</label>
           <input type="text" id="name" value="Max Mustermann" />
 
+          <!-- E-Mail des Benutzers -->
+          <label for="email">E-Mail:</label>
+          <input type="email" id="email" value="max@example.com" />
+
+          <!-- Telefon des Benutzers -->
+          <label for="phone">Telefon:</label>
+          <input type="tel" id="phone" value="+49 123 4567890" />
+
+          <!-- Fakultät des Benutzers -->
+          <label for="faculty">Fakultät:</label>
+          <input type="text" id="faculty" value="Informatik" />
+
           <!-- Status des Benutzers (Student oder Tutor) -->
           <label for="status">Status:</label>
           <select id="status">
             <option value="student" selected>Student</option>
-            <!-- Standardmäßig als Student ausgewählt -->
             <option value="tutor">Tutor</option>
           </select>
 
@@ -98,9 +109,12 @@ Ich bin ein Student und arbeite an verschiedenen Projekten.</textarea
 
       saveBtn.addEventListener("click", function (event) {
         event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
-        const name = document.getElementById("name").value; // Name aus dem Formular
-        const status = document.getElementById("status").value; // Status aus dem Dropdown
-        const description = document.getElementById("description").value; // Beschreibung aus dem Textfeld
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const faculty = document.getElementById("faculty").value;
+        const status = document.getElementById("status").value;
+        const description = document.getElementById("description").value;
 
         // Hier können die Daten gespeichert werden, z.B. in localStorage oder im Backend
         alert(

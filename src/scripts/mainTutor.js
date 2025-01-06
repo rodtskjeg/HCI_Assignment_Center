@@ -7,6 +7,5 @@ document.getElementById("submitBtn").addEventListener("click", () => {
 
     // Weiterleitung zur Aufgaben-Übersicht-Seite
     window.location.href = "assignmentTutor.html"; // Hier die Seite zur Aufgabenübersicht
-  } else {
   }
 });

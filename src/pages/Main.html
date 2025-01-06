@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assignment Center 2.0</title>
-    <link rel="stylesheet" href="../styles/main.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
     <!-- Header -->
     <header>
-        <h1>Assignment Center 2.0</h1>
-        <nav>
-            <a href="../pages/main.html">Home</a>
-            <a href="../pages/profile.html">Profil</a>
-            <a href="../pages/login.html">Abmelden</a>
-        </nav>
+      <h1>Assignment Center 2.0</h1>
+      <nav>
+        <a href="../pages/main.html">Home</a>
+        <a href="../pages/chatWithTutor.html">Chat</a>
+        <a href="../pages/profile.html">Profil</a>
+        <a href="../pages/login.html">Abmelden</a>
+      </nav>
     </header>
 
     <!-- Main Content -->
     <main>
-        <h2>Willkommen im Assignment Center</h2>
-        <p>Finde oder poste deine Aufgaben einfach und schnell!</p>
+      <h2>Willkommen im Assignment Center</h2>
+      <p>Finde oder poste deine Aufgaben einfach und schnell!</p>
 
-        <!-- Fakultäten-Auswahl -->
-        <div class="faculty-selection">
-            <label for="faculty">Wähle deine Fakultät:</label>
-            <select id="faculty">
-                <option value="">-- Fakultät auswählen --</option>
-                <option value="engineering">Ingenieurwissenschaften</option>
-                <option value="business">Wirtschaftswissenschaften</option>
-                <option value="law">Rechtswissenschaften</option>
-                <option value="medicine">Medizin</option>
-                <option value="arts">Geisteswissenschaften</option>
-            </select>
-            <button id="submitBtn">Submit</button>
-        </div>
+      <!-- Fakultäten-Auswahl -->
+      <div class="faculty-selection">
+        <label for="faculty">Wähle deinen Kurs:</label>
+        <select id="faculty">
+          <option value="">-- Kurs auswählen --</option>
+          <option value="hci">HCI</option>
+          <option value="gbs">GBS</option>
+          <option value="mathe_2">Mathe II</option>
+          <option value="prog_2">Programmieren II</option>
+          <option value="data">Datenstrukturen</option>
+        </select>
+        <button id="submitBtn">Submit</button>
+      </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Assignment Center</p>
+      <p>&copy; 2024 Assignment Center</p>
     </footer>
 
     <script src="../scripts/main.js"></script>
-</body>
+  </body>
 </html>

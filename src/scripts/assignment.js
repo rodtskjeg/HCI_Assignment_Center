@@ -3,21 +3,20 @@ const selectedFaculty = localStorage.getItem("selectedFaculty");
 
 // Map für die Übersetzung der Fakultäten
 const facultyNameMap = {
-  engineering: "Ingenieurwissenschaften",
-  business: "Wirtschaftswissenschaften",
-  law: "Rechtswissenschaften",
-  medicine: "Medizin",
-  arts: "Geisteswissenschaften",
+  hci: "HCI",
+  gbs: "GBS",
+  mathe_2: "Mathe II",
+  prog_2: "Programmieren II",
+  data: "Datenstrukturen",
 };
 
 // Fakultätsnamen übersetzen und anzeigen
 const facultyDisplay = selectedFaculty
-  ? facultyNameMap[selectedFaculty] || "Keine Fakultät ausgewählt"
-  : "Keine Fakultät ausgewählt";
+  ? facultyNameMap[selectedFaculty] || "Kein Kurs ausgewählt"
+  : "Kein Kurs ausgewählt";
 
 // Fakultät im HTML anzeigen
-document.getElementById("facultyName").innerText =
-  "Fakultät: " + facultyDisplay;
+document.getElementById("facultyName").innerText = "Kurs: " + facultyDisplay;
 
 // Fakultät auch im Header-Titel anzeigen
 const headerTitle = document.getElementById("headerTitle");
@@ -27,13 +26,12 @@ headerTitle.textContent += selectedFaculty ? ` - ${facultyDisplay}` : "";
 const fileUpload = document.getElementById("fileUpload");
 fileUpload.addEventListener("change", function () {
   const file = this.files[0];
+  const fileNameDisplay = document.getElementById("fileNameDisplay");
+
   if (file) {
-    // Zeigt den Namen der ausgewählten Datei an
-    document.getElementById("fileNameDisplay").innerText =
-      "Ausgewählte Datei: " + file.name;
+    fileNameDisplay.innerText = "Ausgewählte Datei: " + file.name;
   } else {
-    // Wenn keine Datei ausgewählt wurde, wird das Textfeld zurückgesetzt
-    document.getElementById("fileNameDisplay").innerText = "";
+    fileNameDisplay.innerText = "";
   }
 });
 
@@ -76,4 +74,19 @@ document
     // Formular zurücksetzen nach dem Hinzufügen der neuen Zeile
     document.getElementById("assignmentForm").reset();
     document.getElementById("fileNameDisplay").innerText = "";
+  });
+
+// Beispiel: Diese Funktion aufrufen, wenn du neue Daten hinzufügst oder abrufst
+function updateStudentPointsDisplay(studentName, points) {
+  const studentPointsDisplay = document.getElementById("studentPointsDisplay");
+  studentPointsDisplay.innerText = `${studentName} hat insgesamt ${points} Punkte.`;
+}
+
+// Rauminfo anzeigen oder ausblenden
+document
+  .getElementById("showRoomInfoBtn")
+  .addEventListener("click", function () {
+    const roomInfo = document.getElementById("roomInfo");
+    roomInfo.style.display =
+      roomInfo.style.display === "none" ? "block" : "none";
   });

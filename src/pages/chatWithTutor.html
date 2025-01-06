@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat mit Tutor - Assignment Center 2.0</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1 id="headerTitle">Assignment Center 2.0</h1>
+      <nav>
+        <a href="../pages/main.html">Home</a>
+        <a href="../pages/profile.html">Profil</a>
+        <a href="../pages/login.html">Abmelden</a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <h2>Chat mit Tutor</h2>
+
+      <!-- Tutor-Info -->
+      <div class="tutor-info">
+        <p><strong>Tutor:</strong> Leon Wachowski</p>
+        <p id="facultyName" class="faculty-display"></p>
+      </div>
+
+      <div class="chat-container">
+        <!-- Chatverlauf -->
+        <div class="chat-window" id="chatWindow">
+          <!-- Beispielnachrichten -->
+          <div class="chat-message student">
+            <span class="message-author">Student:</span>
+            <p>Hallo, ich habe eine Frage zu meiner Aufgabe.</p>
+          </div>
+          <div class="chat-message tutor">
+            <span class="message-author">Tutor:</span>
+            <p>Natürlich! Wie kann ich Ihnen helfen?</p>
+          </div>
+        </div>
+
+        <!-- Eingabebereich für neue Nachrichten -->
+        <form id="chatForm" class="chat-input-area">
+          <input
+            type="text"
+            id="chatInput"
+            placeholder="Nachricht eingeben..."
+            required
+          />
+          <button type="submit" id="sendBtn">Senden</button>
+        </form>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Assignment Center | Alle Rechte vorbehalten</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Funktion zum Hinzufügen neuer Nachrichten zum Chatfenster
+      document
+        .getElementById("chatForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const messageInput = document.getElementById("chatInput");
+          const chatWindow = document.getElementById("chatWindow");
+
+          // Neue Nachricht hinzufügen
+          const newMessage = document.createElement("div");
+          newMessage.classList.add("chat-message", "student");
+          newMessage.innerHTML = `
+            <span class="message-author">Student:</span>
+            <p>${messageInput.value}</p>
+          `;
+          chatWindow.appendChild(newMessage);
+
+          // Eingabefeld leeren
+          messageInput.value = "";
+
+          // Scroll zum Ende des Chatfensters
+          chatWindow.scrollTop = chatWindow.scrollHeight;
+        });
+
+      // Fakultät aus localStorage auslesen
+      const selectedFaculty = localStorage.getItem("selectedFaculty");
+
+      // Map für die Übersetzung der Fakultäten
+      const facultyNameMap = {
+        hci: "HCI",
+        gbs: "GBS",
+        mathe_2: "Mathe II",
+        prog_2: "Programmieren II",
+        data: "Datenstrukturen",
+      };
+
+      // Fakultätsnamen übersetzen und anzeigen
+      const facultyDisplay = selectedFaculty
+        ? facultyNameMap[selectedFaculty] || "Kein Kurs ausgewählt"
+        : "Kein Kurs ausgewählt";
+
+      document.getElementById("facultyName").innerHTML =
+        "<strong>Kurs: </strong>" + facultyDisplay;
+
+      // Fakultät auch im Header-Titel anzeigen
+      const headerTitle = document.getElementById("headerTitle");
+      headerTitle.textContent += selectedFaculty ? ` - ${facultyDisplay}` : "";
+    </script>
+  </body>
+</html>
