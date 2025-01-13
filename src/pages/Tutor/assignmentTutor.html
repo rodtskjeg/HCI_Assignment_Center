@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -12,7 +12,9 @@
   </head>
   <body>
     <header>
-      <h1 id="headerTitle">Assignment Center 2.0</h1>
+      <a href="../Tutor/tutorMain.html">
+        <h1 id="headerTitle">Assignment Center 2.0</h1>
+      </a>
       <nav>
         <a href="../Tutor/tutorMain.html">Home</a>
         <a href="../Tutor/assignmentTutor.html">Aufgaben</a>
@@ -49,7 +51,7 @@
                 >Nicht bearbeitet</span
               >
             </td>
-            <td>
+            <td id="downloadLink">
               <a
                 href="../../../public/Thinking.pdf"
                 download="Projekt A - Max Mustermann.pdf"
@@ -70,7 +72,7 @@
                 >Nicht bearbeitet</span
               >
             </td>
-            <td>
+            <td id="downloadLink">
               <a
                 href="../../public/Thinking.pdf"
                 download="Projekt B - Lisa Müller.pdf"
@@ -91,7 +93,7 @@
                 >Im Prozess</span
               >
             </td>
-            <td>
+            <td id="downloadLink">
               <a
                 href="../../public/Thinking.pdf"
                 download="Projekt C - John Doe.pdf"
@@ -103,7 +105,7 @@
         </tbody>
       </table>
 
-      <div id="uploadSection" style="display: none; margin-top: 20px">
+      <div id="mainContent">
         <h3>Bearbeitung abschließen</h3>
         <form id="updateForm">
           <label for="projectSelect">Projekt auswählen:</label>
@@ -124,6 +126,11 @@
 
           <button type="submit">Aktualisieren</button>
         </form>
+      </div>
+
+      <div id="loadingScreen">
+        <img src="../../../public/hapi-cat.gif" alt="Lädt..." />
+        <p>Bitte warten, die Datei wird hochgeladen...</p>
       </div>
 
       <div class="button-container">
@@ -157,31 +164,46 @@
         .getElementById("updateForm")
         .addEventListener("submit", (event) => {
           event.preventDefault();
-          const project = document.getElementById("projectSelect").value;
-          const points = document.getElementById("points").value;
 
-          const statusCell = document.getElementById(
-            `status-${project.toLowerCase().replace(/\s+/g, "-")}`
-          );
-          const pointsCell = document.getElementById(
-            `points-${project.toLowerCase().replace(/\s+/g, "-")}`
-          );
-          const row = document.getElementById(
-            `row-${project.toLowerCase().replace(/\s+/g, "-")}`
-          );
+          // Verberge das Upload-Formular und zeige den Ladebildschirm
+          document.getElementById("mainContent").style.display = "none";
+          document.getElementById("loadingScreen").style.display = "flex";
 
-          if (statusCell.dataset.status !== "Fertig") {
-            statusCell.textContent = "Fertig";
-            statusCell.dataset.status = "Fertig";
-            statusCell.classList.remove("nicht-fertig", "abgegeben");
-            statusCell.classList.add("fertig");
-          }
+          // Füge hier eine Verzögerung ein (z. B. 2 Sekunden für den Ladebildschirm)
+          setTimeout(() => {
+            const project = document.getElementById("projectSelect").value;
+            const points = document.getElementById("points").value;
 
-          pointsCell.textContent = `${points} Punkte`;
+            const statusCell = document.getElementById(
+              `status-${project.toLowerCase().replace(/\s+/g, "-")}`
+            );
+            const pointsCell = document.getElementById(
+              `points-${project.toLowerCase().replace(/\s+/g, "-")}`
+            );
+            const row = document.getElementById(
+              `row-${project.toLowerCase().replace(/\s+/g, "-")}`
+            );
 
-          alert(`${project} wurde erfolgreich aktualisiert!`);
-          document.getElementById("updateForm").reset();
-          document.getElementById("uploadSection").style.display = "none";
+            if (statusCell.dataset.status !== "Fertig") {
+              statusCell.textContent = "Fertig";
+              statusCell.dataset.status = "Fertig";
+              statusCell.classList.remove("nicht-fertig", "abgegeben");
+              statusCell.classList.add("fertig");
+            }
+
+            pointsCell.textContent = `${points} Punkte`;
+
+            // Aktualisiere den Dateilink (hier könnte der tatsächliche Dateipfad eingefügt werden)
+            const newFileLink = document.createElement("a");
+            newFileLink.href = "#"; // Hier sollte der tatsächliche Pfad eingefügt werden
+            newFileLink.textContent = `Projekt ${project} - Neue Datei`;
+            row.cells[4].innerHTML = "";
+            row.cells[4].appendChild(newFileLink);
+
+            // Verstecke den Ladebildschirm und zeige das Formular erneut
+            document.getElementById("loadingScreen").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+          }, 2000); // 2 Sekunden Verzögerung
         });
     </script>
   </body>

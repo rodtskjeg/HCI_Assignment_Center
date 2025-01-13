@@ -41,39 +41,49 @@ document
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Eingabewerte sammeln
-    const projectName = document.getElementById("projectName").value;
-    const studentName = document.getElementById("studentName").value;
-    const timeSpent = document.getElementById("timeSpent").value;
-    const status = document.getElementById("status").value;
-    const fileName = fileUpload.files[0]
-      ? fileUpload.files[0].name
-      : "Keine Datei";
+    // Haupt-Content verbergen und Ladebildschirm anzeigen
+    document.getElementById("mainContent").style.display = "none";
+    document.getElementById("loadingScreen").style.display = "flex";
 
-    // Neue Zeile für die Tabelle erstellen
-    const table = document
-      .getElementById("assignmentTable")
-      .getElementsByTagName("tbody")[0];
-    const newRow = table.insertRow();
+    // Simuliere einen Uploadprozess mit einem Timeout
+    setTimeout(() => {
+      // Ladebildschirm wieder verbergen und Haupt-Content anzeigen
+      document.getElementById("loadingScreen").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
 
-    // Zellen für die verschiedenen Spalten der neuen Zeile hinzufügen
-    newRow.insertCell(0).innerText = projectName;
-    newRow.insertCell(1).innerText = studentName;
-    newRow.insertCell(2).innerText = timeSpent + " Stunden";
+      // Neue Zeile zur Tabelle hinzufügen
+      const projectName = document.getElementById("projectName").value;
+      const studentName = document.getElementById("studentName").value;
+      const timeSpent = document.getElementById("timeSpent").value;
+      const status = document.getElementById("status").value;
+      const fileUpload = document.getElementById("fileUpload");
+      const fileName = fileUpload.files[0]
+        ? fileUpload.files[0].name
+        : "Keine Datei";
 
-    // Status-Zelle mit farblichem Label hinzufügen
-    const statusCell = newRow.insertCell(3);
-    statusCell.innerHTML = `<span class="status-label ${status
-      .toLowerCase()
-      .replace(" ", "-")}">${status}</span>`;
+      const table = document
+        .getElementById("assignmentTable")
+        .getElementsByTagName("tbody")[0];
+      const newRow = table.insertRow();
 
-    // Dateiname und Punkte-Feld
-    newRow.insertCell(4).innerText = fileName;
-    newRow.insertCell(5).innerText = "--"; // Punkte-Feld bleibt leer
+      newRow.insertCell(0).innerHTML =
+        `<input type="checkbox" class="select-file" />`;
+      newRow.insertCell(1).innerText = projectName;
+      newRow.insertCell(2).innerText = studentName;
+      newRow.insertCell(3).innerText = timeSpent + " Stunden";
 
-    // Formular zurücksetzen nach dem Hinzufügen der neuen Zeile
-    document.getElementById("assignmentForm").reset();
-    document.getElementById("fileNameDisplay").innerText = "";
+      const statusCell = newRow.insertCell(4);
+      statusCell.innerHTML = `<span class="status-label ${status
+        .toLowerCase()
+        .replace(" ", "-")}">${status}</span>`;
+
+      newRow.insertCell(5).innerText = fileName;
+      newRow.insertCell(6).innerText = "--";
+
+      // Formular zurücksetzen und Dateianzeige löschen
+      document.getElementById("assignmentForm").reset();
+      document.getElementById("fileNameDisplay").innerText = "";
+    }, 2000); // Simulierter Upload dauert 2 Sekunden
   });
 
 // Beispiel: Diese Funktion aufrufen, wenn du neue Daten hinzufügst oder abrufst
@@ -90,3 +100,44 @@ document
     roomInfo.style.display =
       roomInfo.style.display === "none" ? "block" : "none";
   });
+
+// Löschen-Button für die Tabelle
+document
+  .querySelector(".delete-file-btn")
+  .addEventListener("click", function () {
+    const selectedFiles = document.querySelectorAll(".select-file:checked");
+
+    if (selectedFiles.length > 0) {
+      selectedFiles.forEach((file) => {
+        const row = file.closest("tr");
+        row.remove();
+      });
+    } else {
+      // Wenn keine Dateien ausgewählt sind, leere die gesamte Tabelle
+      const table = document
+        .getElementById("assignmentTable")
+        .getElementsByTagName("tbody")[0];
+      table.innerHTML = "";
+    }
+  });
+
+// Ersetzen-Button für die Tabelle
+document
+  .querySelector(".replace-file-btn")
+  .addEventListener("click", function () {
+    const selectedFiles = document.querySelectorAll(".select-file:checked");
+
+    if (selectedFiles.length > 0) {
+      selectedFiles.forEach((file) => {
+        const row = file.closest("tr");
+        const fileInput = row.querySelector('input[type="file"]');
+        fileInput.click();
+
+        fileInput.addEventListener("change", function () {
+          const newFileName = fileInput.files[0].name;
+          row.cells[5].innerText = newFileName;
+        });
+      });
+    }
+  });
+

@@ -7,6 +7,9 @@ document.getElementById("submitBtn").addEventListener("click", function () {
 
     // Weiterleitung zur Assignment-Seite
     window.location.href = "../pages/assignment.html";
+  } else {
+    console.log("Fehlermeldung wird gesetzt");
+    document.getElementById("notSelectedCourse").innerText =
+      "⚠️ Bitte wählen Sie einen Kurs.";
   }
-
 });

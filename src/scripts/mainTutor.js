@@ -1,11 +1,15 @@
-document.getElementById("submitBtn").addEventListener("click", () => {
-  const selectedFaculty = document.getElementById("faculty").value;
+document.getElementById("submitBtn").addEventListener("click", function () {
+  const faculty = document.getElementById("faculty").value;
 
-  if (selectedFaculty) {
-    // Speichern der Fakultät in sessionStorage
-    sessionStorage.setItem("faculty", selectedFaculty);
+  // Fakultät im localStorage speichern, wenn eine Fakultät ausgewählt wurde
+  if (faculty !== "") {
+    localStorage.setItem("selectedFaculty", faculty);
 
-    // Weiterleitung zur Aufgaben-Übersicht-Seite
-    window.location.href = "assignmentTutor.html"; // Hier die Seite zur Aufgabenübersicht
+    // Weiterleitung zur Assignment-Seite
+    window.location.href = "../Tutor/assignmentTutor.html";
+  } else {
+    console.log("Fehlermeldung wird gesetzt");
+    document.getElementById("notSelectedCourse").innerText =
+      "⚠️ Bitte wählen Sie einen Kurs.";
   }
 });
