@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="de">
   <head>
+    <!-- Meta-Daten und Links zu Stylesheets und externen Ressourcen -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aufgaben Übersicht</title>
@@ -11,6 +12,7 @@
     />
   </head>
   <body>
+    <!-- Header mit Navigation -->
     <header>
       <a href="../Tutor/tutorMain.html">
         <h1 id="headerTitle">Assignment Center 2.0</h1>
@@ -24,9 +26,11 @@
     </header>
 
     <main>
+      <!-- Hauptinhalt: Aufgaben Übersicht -->
       <h2>Aufgaben Übersicht</h2>
       <p id="facultyName" class="faculty-display"></p>
 
+      <!-- Tabelle zur Anzeige der Aufgaben -->
       <table id="assignmentTable">
         <thead>
           <tr>
@@ -39,6 +43,7 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Jede Zeile stellt ein Projekt dar -->
           <tr id="row-projekt-a">
             <td>Projekt A</td>
             <td>Max Mustermann</td>
@@ -107,6 +112,7 @@
 
       <div id="mainContent">
         <h3>Bearbeitung abschließen</h3>
+        <!-- Formular zur Aktualisierung der Projektinformationen -->
         <form id="updateForm">
           <label for="projectSelect">Projekt auswählen:</label>
           <select id="projectSelect" required>
@@ -128,16 +134,14 @@
         </form>
       </div>
 
+      <!-- Ladebildschirm für die Dateiupload-Operation -->
       <div id="loadingScreen">
         <img src="../../../public/hapi-cat.gif" alt="Lädt..." />
         <p>Bitte warten, die Datei wird hochgeladen...</p>
       </div>
 
       <div class="button-container">
-        <button id="toggleFormButton" style="margin-top: 20px">
-          Bearbeitete Datei hochladen
-        </button>
-
+        <!-- Button für den Chat -->
         <a href="../Tutor/chatWithStudent.html">
           <button id="chatButton" style="margin-top: 20px">
             Chat
@@ -147,33 +151,28 @@
       </div>
     </main>
 
+    <!-- Footer mit Copyright-Hinweis -->
     <footer>
       <p>&copy; 2024 Assignment Center | Alle Rechte vorbehalten</p>
     </footer>
 
     <script>
-      document
-        .getElementById("toggleFormButton")
-        .addEventListener("click", () => {
-          const uploadSection = document.getElementById("uploadSection");
-          uploadSection.style.display =
-            uploadSection.style.display === "none" ? "block" : "none";
-        });
-
+      // Event Listener für das Update-Formular
       document
         .getElementById("updateForm")
         .addEventListener("submit", (event) => {
           event.preventDefault();
 
-          // Verberge das Upload-Formular und zeige den Ladebildschirm
+          // Verstecke das Formular und zeige den Ladebildschirm
           document.getElementById("mainContent").style.display = "none";
           document.getElementById("loadingScreen").style.display = "flex";
 
-          // Füge hier eine Verzögerung ein (z. B. 2 Sekunden für den Ladebildschirm)
+          // Verzögerung für den Ladebildschirm (z. B. 2 Sekunden)
           setTimeout(() => {
             const project = document.getElementById("projectSelect").value;
             const points = document.getElementById("points").value;
 
+            // Status-Update für das Projekt
             const statusCell = document.getElementById(
               `status-${project.toLowerCase().replace(/\s+/g, "-")}`
             );
@@ -184,6 +183,7 @@
               `row-${project.toLowerCase().replace(/\s+/g, "-")}`
             );
 
+            // Setze den Status auf "Fertig" wenn nicht bereits erledigt
             if (statusCell.dataset.status !== "Fertig") {
               statusCell.textContent = "Fertig";
               statusCell.dataset.status = "Fertig";
@@ -191,11 +191,12 @@
               statusCell.classList.add("fertig");
             }
 
+            // Zeige die erreichten Punkte an
             pointsCell.textContent = `${points} Punkte`;
 
-            // Aktualisiere den Dateilink (hier könnte der tatsächliche Dateipfad eingefügt werden)
+            // Aktualisiere den Dateilink
             const newFileLink = document.createElement("a");
-            newFileLink.href = "#"; // Hier sollte der tatsächliche Pfad eingefügt werden
+            newFileLink.href = "#"; // Hier sollte der tatsächliche Dateipfad eingefügt werden
             newFileLink.textContent = `Projekt ${project} - Neue Datei`;
             row.cells[4].innerHTML = "";
             row.cells[4].appendChild(newFileLink);

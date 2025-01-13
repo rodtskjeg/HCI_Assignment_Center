@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="de">
   <head>
+    <!-- Meta-Daten für Zeichencodierung und Viewport -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aufgaben Übersicht</title>
@@ -34,6 +35,7 @@
       <table id="assignmentTable">
         <thead>
           <tr>
+            <!-- Kopfzeilen für die Tabelle -->
             <th></th>
             <th>Name des Projekts</th>
             <th>Name vom Studenten</th>
@@ -45,6 +47,7 @@
         </thead>
         <tbody>
           <tr>
+            <!-- Zeile für ein eingereichtes Projekt -->
             <td><input type="checkbox" class="select-file" /></td>
             <td>Projekt 1</td>
             <td>Max Mustermann</td>
@@ -57,10 +60,11 @@
       </table>
 
       <div class="button-container">
+        <!-- Löschen-Button für markierte Aufgaben -->
         <button class="delete-file-btn">Löschen</button>
       </div>
 
-      <!-- Punkteübersicht -->
+      <!-- Punkteübersicht des Studenten -->
       <div id="studentPointsSection">
         <h3>Gesamtpunkte</h3>
         <p id="studentPointsDisplay">Max Mustermann hat insgesamt 85 Punkte.</p>
@@ -73,8 +77,10 @@
           <!-- Eingabefelder für das neue Assignment -->
           <label for="projectName">Projektname:</label>
           <input type="text" id="projectName" name="projectName" required />
+
           <label for="studentName">Name des Studenten:</label>
           <input type="text" id="studentName" name="studentName" required />
+
           <label for="timeSpent">Zeit (in Stunden):</label>
           <input
             type="number"
@@ -83,19 +89,24 @@
             min="0"
             required
           />
+
           <label for="fileUpload">Datei hochladen (PDF):</label>
           <input type="file" id="fileUpload" accept=".pdf" required />
+
           <p id="fileNameDisplay" style="font-size: 0.9rem; color: #555"></p>
+
           <label for="status">Status:</label>
           <select id="status" name="status" required>
             <option value="Fertig">Fertig</option>
             <option value="Nicht fertig">Nicht fertig</option>
           </select>
+
           <!-- Button zum Absenden des Formulars -->
           <button type="submit"><i class="fas fa-upload"></i> Hochladen</button>
         </form>
       </div>
 
+      <!-- Ladebildschirm während des Datei-Uploads -->
       <div class="upload-section">
         <div id="loadingScreen">
           <img src="../../public/hapi-cat.gif" alt="Lädt..." />
@@ -104,12 +115,14 @@
       </div>
 
       <div class="button-container">
+        <!-- Chat-Button -->
         <a href="../pages/chatWithTutor.html">
           <button id="chatTutorBtn">
             <i class="fas fa-comment-dots"></i> Chat
           </button>
         </a>
 
+        <!-- Button zur Anzeige der Rauminfo -->
         <button id="showRoomInfoBtn">
           <i class="fas fa-info-circle"></i> Rauminfo anzeigen
         </button>

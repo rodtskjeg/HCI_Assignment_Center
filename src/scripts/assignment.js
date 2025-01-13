@@ -41,6 +41,24 @@ document
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
+    // Validierung der Eingabefelder
+    const projectName = document.getElementById("projectName").value;
+    const studentName = document.getElementById("studentName").value;
+    const timeSpent = document.getElementById("timeSpent").value;
+    const status = document.getElementById("status").value;
+    const fileUpload = document.getElementById("fileUpload");
+
+    if (
+      !projectName ||
+      !studentName ||
+      !timeSpent ||
+      !status ||
+      !fileUpload.files.length
+    ) {
+      alert("Bitte füllen Sie alle Felder aus und laden Sie eine Datei hoch.");
+      return; // Verhindert das Absenden des Formulars
+    }
+
     // Haupt-Content verbergen und Ladebildschirm anzeigen
     document.getElementById("mainContent").style.display = "none";
     document.getElementById("loadingScreen").style.display = "flex";
@@ -52,14 +70,7 @@ document
       document.getElementById("mainContent").style.display = "block";
 
       // Neue Zeile zur Tabelle hinzufügen
-      const projectName = document.getElementById("projectName").value;
-      const studentName = document.getElementById("studentName").value;
-      const timeSpent = document.getElementById("timeSpent").value;
-      const status = document.getElementById("status").value;
-      const fileUpload = document.getElementById("fileUpload");
-      const fileName = fileUpload.files[0]
-        ? fileUpload.files[0].name
-        : "Keine Datei";
+      const fileName = fileUpload.files[0].name;
 
       const table = document
         .getElementById("assignmentTable")
@@ -140,4 +151,3 @@ document
       });
     }
   });
-
