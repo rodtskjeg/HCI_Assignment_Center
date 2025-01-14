@@ -15,24 +15,16 @@ const facultyDisplay = selectedFaculty
   ? facultyNameMap[selectedFaculty] || "Kein Kurs ausgewählt"
   : "Kein Kurs ausgewählt";
 
-// Fakultät im HTML anzeigen
 document.getElementById("facultyName").innerText = "Kurs: " + facultyDisplay;
 
-// Fakultät auch im Header-Titel anzeigen
 const headerTitle = document.getElementById("headerTitle");
 headerTitle.textContent += selectedFaculty ? ` - ${facultyDisplay}` : "";
 
-// Dateiname anzeigen, wenn eine Datei hochgeladen wird
-const fileUpload = document.getElementById("fileUpload");
-fileUpload.addEventListener("change", function () {
+// Datei-Upload anzeigen
+document.getElementById("fileUpload").addEventListener("change", function () {
   const file = this.files[0];
   const fileNameDisplay = document.getElementById("fileNameDisplay");
-
-  if (file) {
-    fileNameDisplay.innerText = "Ausgewählte Datei: " + file.name;
-  } else {
-    fileNameDisplay.innerText = "";
-  }
+  fileNameDisplay.innerText = file ? `Ausgewählte Datei: ${file.name}` : "";
 });
 
 // Formular-Submit: Neue Zeile zur Tabelle hinzufügen
@@ -41,113 +33,80 @@ document
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Validierung der Eingabefelder
     const projectName = document.getElementById("projectName").value;
-    const studentName = document.getElementById("studentName").value;
     const timeSpent = document.getElementById("timeSpent").value;
     const status = document.getElementById("status").value;
     const fileUpload = document.getElementById("fileUpload");
 
-    if (
-      !projectName ||
-      !studentName ||
-      !timeSpent ||
-      !status ||
-      !fileUpload.files.length
-    ) {
+    if (!projectName || !timeSpent || !status || !fileUpload.files.length) {
       alert("Bitte füllen Sie alle Felder aus und laden Sie eine Datei hoch.");
-      return; // Verhindert das Absenden des Formulars
+      return;
     }
 
-    // Haupt-Content verbergen und Ladebildschirm anzeigen
     document.getElementById("mainContent").style.display = "none";
     document.getElementById("loadingScreen").style.display = "flex";
 
-    // Simuliere einen Uploadprozess mit einem Timeout
     setTimeout(() => {
-      // Ladebildschirm wieder verbergen und Haupt-Content anzeigen
       document.getElementById("loadingScreen").style.display = "none";
       document.getElementById("mainContent").style.display = "block";
 
-      // Neue Zeile zur Tabelle hinzufügen
       const fileName = fileUpload.files[0].name;
-
       const table = document
         .getElementById("assignmentTable")
         .getElementsByTagName("tbody")[0];
-      const newRow = table.insertRow();
 
+      const newRow = table.insertRow();
       newRow.insertCell(0).innerHTML =
         `<input type="checkbox" class="select-file" />`;
       newRow.insertCell(1).innerText = projectName;
-      newRow.insertCell(2).innerText = studentName;
-      newRow.insertCell(3).innerText = timeSpent + " Stunden";
-
+      newRow.insertCell(2).innerText = "Max Mustermann";
+      newRow.insertCell(3).innerText = `${timeSpent} Stunden`;
       const statusCell = newRow.insertCell(4);
-      statusCell.innerHTML = `<span class="status-label ${status
-        .toLowerCase()
-        .replace(" ", "-")}">${status}</span>`;
-
+      statusCell.innerHTML = `<span class="status-label ${status.toLowerCase().replace(" ", "-")}">${status}</span>`;
       newRow.insertCell(5).innerText = fileName;
-      newRow.insertCell(6).innerText = "--";
+      newRow.insertCell(6).innerText = "0"; // Standardmäßig 0 Punkte
 
-      // Formular zurücksetzen und Dateianzeige löschen
       document.getElementById("assignmentForm").reset();
       document.getElementById("fileNameDisplay").innerText = "";
-    }, 2000); // Simulierter Upload dauert 2 Sekunden
+
+      updateTotalPoints();
+    }, 2000);
   });
 
-// Beispiel: Diese Funktion aufrufen, wenn du neue Daten hinzufügst oder abrufst
-function updateStudentPointsDisplay(studentName, points) {
-  const studentPointsDisplay = document.getElementById("studentPointsDisplay");
-  studentPointsDisplay.innerText = `${studentName} hat insgesamt ${points} Punkte.`;
+// Punkte-Update-Funktion
+function updateTotalPoints() {
+  const table = document
+    .getElementById("assignmentTable")
+    .getElementsByTagName("tbody")[0];
+
+  let totalPoints = 0;
+
+  for (let row of table.rows) {
+    const pointsCell = row.cells[6];
+    const points = parseInt(pointsCell.innerText, 10);
+    if (!isNaN(points)) {
+      totalPoints += points;
+    }
+  }
+
+  document.getElementById("totalPoints").innerText = totalPoints;
 }
 
-// Rauminfo anzeigen oder ausblenden
-document
-  .getElementById("showRoomInfoBtn")
-  .addEventListener("click", function () {
-    const roomInfo = document.getElementById("roomInfo");
-    roomInfo.style.display =
-      roomInfo.style.display === "none" ? "block" : "none";
-  });
-
-// Löschen-Button für die Tabelle
+// Zeilen löschen und Punkte aktualisieren
 document
   .querySelector(".delete-file-btn")
   .addEventListener("click", function () {
     const selectedFiles = document.querySelectorAll(".select-file:checked");
-
     if (selectedFiles.length > 0) {
       selectedFiles.forEach((file) => {
         const row = file.closest("tr");
         row.remove();
       });
+      updateTotalPoints();
     } else {
-      // Wenn keine Dateien ausgewählt sind, leere die gesamte Tabelle
-      const table = document
-        .getElementById("assignmentTable")
-        .getElementsByTagName("tbody")[0];
-      table.innerHTML = "";
+      alert("Keine Zeile ausgewählt.");
     }
   });
 
-// Ersetzen-Button für die Tabelle
-document
-  .querySelector(".replace-file-btn")
-  .addEventListener("click", function () {
-    const selectedFiles = document.querySelectorAll(".select-file:checked");
-
-    if (selectedFiles.length > 0) {
-      selectedFiles.forEach((file) => {
-        const row = file.closest("tr");
-        const fileInput = row.querySelector('input[type="file"]');
-        fileInput.click();
-
-        fileInput.addEventListener("change", function () {
-          const newFileName = fileInput.files[0].name;
-          row.cells[5].innerText = newFileName;
-        });
-      });
-    }
-  });
+// Initiale Punkteberechnung
+document.addEventListener("DOMContentLoaded", updateTotalPoints);

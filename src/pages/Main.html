@@ -13,34 +13,54 @@
         <h1>Assignment Center 2.0</h1>
       </a>
       <nav>
-        <a href="../pages/main.html">Home</a>
-        <a href="../pages/profile.html">Profil</a>
-        <a href="../pages/login.html">Abmelden</a>
+        <a id="home-link" href="../pages/main.html">Home</a>
+        <a id="profile-link" href="../pages/profile.html">Profil</a>
+        <a id="abmelden-link" href="../pages/login.html">Abmelden</a>
       </nav>
     </header>
 
     <!-- Main Content -->
-    <main>
-      <h2>Willkommen im Assignment Center</h2>
-      <p>Finde oder poste deine Aufgaben einfach und schnell!</p>
-
-      <!-- Fakultäten-Auswahl -->
-      <div class="faculty-selection">
-        <label for="faculty">Wähle deinen Kurs:</label>
-        <select id="faculty">
-          <option value="">-- Kurs auswählen --</option>
-          <option value="hci">HCI</option>
-          <option value="gbs">GBS</option>
-          <option value="mathe_2">Mathe II</option>
-          <option value="prog_2">Programmieren II</option>
-          <option value="data">Datenstrukturen</option>
-        </select>
-        <button id="submitBtn">Submit</button>
-        <div id="notSelectedCourse">
-          <p></p>
+    
+      <div class="main">
+        <div class="block-1">
+          <div class="course-card">
+            <h2>Willkommen im Assignment Center</h2>
+            <p>Finde oder poste deine Aufgaben einfach und schnell!</p>
+            <!-- Fakultäten-Auswahl -->
+            <div class="faculty-selection">
+              <label for="faculty">Wähle deinen Kurs:</label>
+              <select id="faculty">
+                <option value="">-- Kurs auswählen --</option>
+                <option value="hci">HCI</option>
+                <option value="gbs">GBS</option>
+                <option value="mathe_2">Mathe II</option>
+                <option value="prog_2">Programmieren II</option>
+                <option value="data">Datenstrukturen</option>
+              </select>
+              <button id="submitBtn">Submit</button>
+              <div id="notSelectedCourse">
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="block-2">
+          <div class="main-maskot">
+            <img
+              class="img-maskot"
+              id="catImage"
+              height="100"
+              src="../../public/cat.jpg"
+              alt="Cat"
+            />
+            <div class="maskot-text">
+              <p>Ähhh, hast du noch kein Assignment hochgeladen oder was?</p>
+            </div>
+          </div>
+          <audio id="meowSound" src="../../public/meow_2.mp3"></audio>
         </div>
       </div>
-    </main>
+    
 
     <!-- Footer -->
     <footer>
