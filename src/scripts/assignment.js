@@ -64,7 +64,7 @@ document
       const statusCell = newRow.insertCell(4);
       statusCell.innerHTML = `<span class="status-label ${status.toLowerCase().replace(" ", "-")}">${status}</span>`;
       newRow.insertCell(5).innerText = fileName;
-      newRow.insertCell(6).innerText = "0"; // Standardmäßig 0 Punkte
+      newRow.insertCell(6).innerText = "--";
 
       document.getElementById("assignmentForm").reset();
       document.getElementById("fileNameDisplay").innerText = "";
@@ -110,3 +110,99 @@ document
 
 // Initiale Punkteberechnung
 document.addEventListener("DOMContentLoaded", updateTotalPoints);
+
+// Funktion, die den Text der Katze anpasst
+function updateCatText(text) {
+  const maskotText = document.querySelector(".maskot-text p");
+  maskotText.innerText = text;
+  // Katzenbild sichtbar machen
+  document.querySelector(".main-maskot").style.display = "flex";
+}
+
+// Event Listener für das Hover-Event hinzufügen
+document.addEventListener("DOMContentLoaded", function () {
+  const deleteBtn = document.querySelector(".delete-file-btn");
+  const formInputs = document.querySelectorAll(
+    "#assignmentForm input, #assignmentForm select"
+  );
+  const uploadBtn = document.querySelector("#assignmentForm button");
+  const chatBtn = document.querySelector("#chatTutorBtn");
+  const roomInfo = document.getElementById("roomInfo");
+  const roomInfoBtn = document.querySelector("#showRoomInfoBtn");
+  const headerLinks = document.querySelectorAll("header nav a");
+
+  roomInfoBtn.addEventListener("click", function () {
+    // Toggle die Sichtbarkeit der Rauminfo-Sektion
+    if (roomInfo.style.display === "none") {
+      roomInfo.style.display = "flex"; // Zeige die Rauminfo
+    } else {
+      roomInfo.style.display = "none"; // Verberge die Rauminfo
+    }
+  });
+
+  headerLinks.forEach((link) => {
+    link.addEventListener("mouseenter", function () {
+      const maskotText = document.querySelector(".maskot-text p");
+      if (link.innerText === "Home") {
+        maskotText.innerText = "Macht keinen Sinn oder?";
+      } else if (link.innerText === "Aufgaben") {
+        maskotText.innerText = "You shall not pass!";
+      } else if (link.innerText === "Profil") {
+        maskotText.innerText = "Es ist leider keine Insta.";
+      } else if (link.innerText === "Abmelden") {
+        maskotText.innerText = "Nein Steffen, Nein!";
+      }
+    });
+
+    link.addEventListener("mouseleave", function () {
+      // Text zurücksetzen, wenn der Cursor den Link verlässt
+      const maskotText = document.querySelector(".maskot-text p");
+      maskotText.innerText = "Bitte füll jetzt alles ordentlich aus!";
+    });
+  });
+
+  // Wenn der Mauszeiger über den Löschen-Button fährt
+  deleteBtn.addEventListener("mouseover", () =>
+    updateCatText("Wirklich? Etwas löschen?")
+  );
+  deleteBtn.addEventListener("mouseout", () =>
+    updateCatText("Bitte füll jetzt alles ordentlich aus!")
+  );
+
+  // Wenn der Mauszeiger über eines der Formulareingabefelder fährt
+  formInputs.forEach((input) => {
+    input.addEventListener("mouseover", () =>
+      updateCatText("Vergiss nicht, das Formular auszufüllen, sonst Krise!")
+    );
+    input.addEventListener("mouseout", () =>
+      updateCatText("Bitte füll jetzt alles ordentlich aus!")
+    );
+  });
+
+  // Wenn der Mauszeiger über den Hochladen-Button fährt
+  uploadBtn.addEventListener("mouseover", () =>
+    updateCatText("Bereit zum Hochladen?")
+  );
+  uploadBtn.addEventListener("mouseout", () =>
+    updateCatText("Bitte füll jetzt alles ordentlich aus!")
+  );
+
+  // Wenn der Mauszeiger über den Chat-Button fährt
+  chatBtn.addEventListener("mouseover", () =>
+    updateCatText("Möchtest du mit deinem Tutor plaudern?")
+  );
+  chatBtn.addEventListener("mouseout", () =>
+    updateCatText("Bitte füll jetzt alles ordentlich aus!")
+  );
+
+  // Wenn der Mauszeiger über den Rauminfo-Button fährt
+  roomInfoBtn.addEventListener("mouseover", () =>
+    updateCatText("Sieh dir die Raum- und Adressinformationen an!")
+  );
+  roomInfoBtn.addEventListener("mouseout", () =>
+    updateCatText("Bitte füll jetzt alles ordentlich aus!")
+  );
+});
+
+// Anfangstext der Katze anzeigen
+updateCatText("Bitte füll jetzt alles ordentlich aus!");

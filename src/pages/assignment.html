@@ -26,116 +26,131 @@
     </header>
 
     <!-- Main Content -->
-    <main>
-      <h2>Aufgaben Übersicht</h2>
-      <p id="facultyName" class="faculty-display"></p>
-      <p>Tutor: Leon Wachowski</p>
-
-      <!-- Aufgaben-Tabelle zur Anzeige der eingereichten Aufgaben -->
-      <table id="assignmentTable">
-        <thead>
-          <tr>
-            <!-- Kopfzeilen für die Tabelle -->
-            <th></th>
-            <th>Name des Projekts</th>
-            <th>Name vom Studenten</th>
-            <th>Zeit</th>
-            <th>Status</th>
-            <th>Dateiname</th>
-            <th>Anzahl der Punkte</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="checkbox" class="select-file" /></td>
-            <td>Projekt 1</td>
-            <td>Max Mustermann</td>
-            <td>5 Stunden</td>
-            <td><span class="status-label fertig">Fertig</span></td>
-            <td>projekt1.pdf</td>
-            <td>85</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="button-container">
-        <!-- Löschen-Button für markierte Aufgaben -->
-        <button class="delete-file-btn">Löschen</button>
+    <div class="main">
+      <div class="block-1">
+        <div class="assignment-card">
+          <h2>Aufgaben Übersicht</h2>
+          <p id="facultyName" class="faculty-display"></p>
+          <p>Tutor: Leon Wachowski</p>
+          <!-- Aufgaben-Tabelle zur Anzeige der eingereichten Aufgaben -->
+          <table id="assignmentTable">
+            <thead>
+              <tr>
+                <!-- Kopfzeilen für die Tabelle -->
+                <th></th>
+                <th>Name des Projekts</th>
+                <th>Name vom Studenten</th>
+                <th>Zeit</th>
+                <th>Status</th>
+                <th>Dateiname</th>
+                <th>Anzahl der Punkte</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" class="select-file" /></td>
+                <td>Projekt 1</td>
+                <td>Max Mustermann</td>
+                <td>5 Stunden</td>
+                <td><span class="status-label fertig">Fertig</span></td>
+                <td>projekt1.pdf</td>
+                <td>85</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="button-container">
+            <!-- Löschen-Button für markierte Aufgaben -->
+            <button class="delete-file-btn">Löschen</button>
+          </div>
+          <!-- Punkteübersicht des Studenten -->
+          <div id="studentPointsSection">
+            <h3>Gesamtpunkte</h3>
+            <p id="studentPointsDisplay">
+              Du hast: <span id="totalPoints">85</span> Punkte
+            </p>
+          </div>
+          <!-- Bereich zum Hochladen eines neuen Assignments -->
+          <div id="mainContent">
+            <h3>Neues Assignment hochladen</h3>
+            <form id="assignmentForm">
+              <!-- Eingabefelder für das neue Assignment -->
+              <label for="projectName">Projektname:</label>
+              <input type="text" id="projectName" name="projectName" required />
+              <label for="timeSpent">Zeit (in Stunden):</label>
+              <input
+                type="number"
+                id="timeSpent"
+                name="timeSpent"
+                min="0"
+                required
+              />
+              <label for="fileUpload">Datei hochladen (PDF):</label>
+              <input type="file" id="fileUpload" accept=".pdf" required />
+              <p
+                id="fileNameDisplay"
+                style="font-size: 0.9rem; color: #555"
+              ></p>
+              <label for="status">Status:</label>
+              <select id="status" name="status" required>
+                <option value="Fertig">Fertig</option>
+                <option value="Nicht fertig">Nicht fertig</option>
+              </select>
+              <!-- Button zum Absenden des Formulars -->
+              <button type="submit">
+                <i class="fas fa-upload"></i> Hochladen
+              </button>
+            </form>
+          </div>
+          <!-- Ladebildschirm während des Datei-Uploads -->
+          <div class="upload-section">
+            <div id="loadingScreen">
+              <img src="../../public/hapi-cat.gif" alt="Lädt..." />
+              <p>Bitte warten, die Datei wird hochgeladen...</p>
+            </div>
+          </div>
+          <div class="button-container">
+            <!-- Chat-Button -->
+            <a href="../pages/chatWithTutor.html">
+              <button id="chatTutorBtn">
+                <i class="fas fa-comment-dots"></i> Chat
+              </button>
+            </a>
+            <!-- Button zur Anzeige der Rauminfo -->
+            <button id="showRoomInfoBtn">
+              <i class="fas fa-info-circle"></i> Rauminfo anzeigen
+            </button>
+          </div>
+          <!-- Bereich für Rauminfo und Foto -->
+          <div id="roomInfo" class="room-info" style="display: none">
+            <div class="room-photo">
+              <img src="../../public/gps.jpg" alt="Foto des Raums" />
+            </div>
+            <div class="room-info-more">
+              <h3>Raum- und Adressinformationen</h3>
+              <p><strong>Raum:</strong> 101</p>
+              <p>
+                <strong>Adresse:</strong> Musterstraße 123, 12345 Musterstadt
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <!-- Punkteübersicht des Studenten -->
-      <div id="studentPointsSection">
-        <h3>Gesamtpunkte</h3>
-        <p id="studentPointsDisplay">
-          Du hast: <span id="totalPoints">85</span> Punkte
-        </p>
-      </div>
-
-      <!-- Bereich zum Hochladen eines neuen Assignments -->
-      <div id="mainContent">
-        <h3>Neues Assignment hochladen</h3>
-        <form id="assignmentForm">
-          <!-- Eingabefelder für das neue Assignment -->
-          <label for="projectName">Projektname:</label>
-          <input type="text" id="projectName" name="projectName" required />
-
-          <label for="timeSpent">Zeit (in Stunden):</label>
-          <input
-            type="number"
-            id="timeSpent"
-            name="timeSpent"
-            min="0"
-            required
+      <div class="block-2">
+        <div class="main-maskot-ass">
+          <img
+            class="img-maskot"
+            id="catImage"
+            height="100"
+            src="../../public/cat_3.jpg"
+            alt="Cat"
           />
-
-          <label for="fileUpload">Datei hochladen (PDF):</label>
-          <input type="file" id="fileUpload" accept=".pdf" required />
-
-          <p id="fileNameDisplay" style="font-size: 0.9rem; color: #555"></p>
-
-          <label for="status">Status:</label>
-          <select id="status" name="status" required>
-            <option value="Fertig">Fertig</option>
-            <option value="Nicht fertig">Nicht fertig</option>
-          </select>
-
-          <!-- Button zum Absenden des Formulars -->
-          <button type="submit"><i class="fas fa-upload"></i> Hochladen</button>
-        </form>
-      </div>
-
-      <!-- Ladebildschirm während des Datei-Uploads -->
-      <div class="upload-section">
-        <div id="loadingScreen">
-          <img src="../../public/hapi-cat.gif" alt="Lädt..." />
-          <p>Bitte warten, die Datei wird hochgeladen...</p>
+          <div class="maskot-text">
+            <p>Bitte füll jetzt alles ordentlich aus!</p>
+          </div>
         </div>
+        <audio id="meowSound" src="../../public/meow_2.mp3"></audio>
       </div>
-
-      <div class="button-container">
-        <!-- Chat-Button -->
-        <a href="../pages/chatWithTutor.html">
-          <button id="chatTutorBtn">
-            <i class="fas fa-comment-dots"></i> Chat
-          </button>
-        </a>
-
-        <!-- Button zur Anzeige der Rauminfo -->
-        <button id="showRoomInfoBtn">
-          <i class="fas fa-info-circle"></i> Rauminfo anzeigen
-        </button>
-      </div>
-
-      <!-- Bereich für Rauminfo und Foto -->
-      <div id="roomInfo" class="room-info" style="display: none">
-        <h3>Raum- und Adressinformationen</h3>
-        <p><strong>Raum:</strong> 101</p>
-        <p><strong>Adresse:</strong> Musterstraße 123, 12345 Musterstadt</p>
-        <div class="room-photo">
-          <img src="../../public/gps.jpg" alt="Foto des Raums" />
-        </div>
-      </div>
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer>

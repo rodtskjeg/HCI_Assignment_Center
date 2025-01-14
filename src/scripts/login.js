@@ -6,18 +6,24 @@ document
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
 
+    const loginError = document.getElementById("loginError");
+    const catImageContainer = document.getElementById("catImageContainer");
+
     if (username === "user" && password === "user") {
       window.location.href = "../pages/main.html";
     } else if (username === "admin" && password === "admin") {
       window.location.href = "../pages/Tutor/tutorMain.html";
     } else {
-      console.log("Fehlermeldung wird gesetzt");
-      document.getElementById("loginError").innerText =
-        "⚠️ Falsche Daten. Bitte probieren Sie noch ein mal.";
+      // Setzt die Fehlermeldung
+      loginError.innerText =
+        "⚠️ Wie du siehst, falsche Daten. Probier noch mal.";
+
+      // Zeigt die Katze an und spielt den Sound
+      catImageContainer.style.display = "block";
+      catImageContainer.style.borderRadius = "15px";
     }
   });
 
-// Funktion zum Anzeigen/Verstecken des Passworts beim Klicken auf das Auge-Icon
 document
   .getElementById("togglePassword")
   .addEventListener("click", function () {

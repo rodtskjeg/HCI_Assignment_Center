@@ -1,5 +1,6 @@
 document.getElementById("submitBtn").addEventListener("click", function () {
   const faculty = document.getElementById("faculty").value;
+  const maskotText = document.querySelector(".maskot-text p");
 
   // Fakultät im localStorage speichern, wenn eine Fakultät ausgewählt wurde
   if (faculty !== "") {
@@ -11,10 +12,11 @@ document.getElementById("submitBtn").addEventListener("click", function () {
     console.log("Fehlermeldung wird gesetzt");
     document.getElementById("notSelectedCourse").innerText =
       "⚠️ Bitte wählen Sie einen Kurs.";
+    maskotText.innerText = "Quatsch! Du brauchst einen Kurs!";
   }
 });
 
-const courseCard = document.querySelector(".course-card");
+const courseCard = document.querySelector(".faculty-selection");
 courseCard.addEventListener("mouseenter", function () {
   // Katze sagt: "Hier kannst du Kurse auswählen"
   const maskotText = document.querySelector(".maskot-text p");
