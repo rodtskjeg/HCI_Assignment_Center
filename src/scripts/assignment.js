@@ -20,11 +20,18 @@ document.getElementById("facultyName").innerText = "Kurs: " + facultyDisplay;
 const headerTitle = document.getElementById("headerTitle");
 headerTitle.textContent += selectedFaculty ? ` - ${facultyDisplay}` : "";
 
-// Datei-Upload anzeigen
+// Datei-Upload anzeigen und Katze-Text aktualisieren
 document.getElementById("fileUpload").addEventListener("change", function () {
   const file = this.files[0];
   const fileNameDisplay = document.getElementById("fileNameDisplay");
   fileNameDisplay.innerText = file ? `Ausgewählte Datei: ${file.name}` : "";
+
+  // Katze-Text aktualisieren
+  if (file) {
+    updateCatText(`Datei "${file.name}" wurde hochgeladen!`);
+  } else {
+    updateCatText("Bitte wählen Sie eine Datei aus.");
+  }
 });
 
 // Formular-Submit: Neue Zeile zur Tabelle hinzufügen
@@ -40,6 +47,9 @@ document
 
     if (!projectName || !timeSpent || !status || !fileUpload.files.length) {
       alert("Bitte füllen Sie alle Felder aus und laden Sie eine Datei hoch.");
+      updateCatText(
+        "Alle Felder müssen ausgefüllt werden und eine Datei muss hochgeladen werden!"
+      );
       return;
     }
 
@@ -70,6 +80,11 @@ document
       document.getElementById("fileNameDisplay").innerText = "";
 
       updateTotalPoints();
+
+      // Katze-Text aktualisieren
+      updateCatText(
+        `Datei "${fileName}" wurde erfolgreich hochgeladen und die Aufgabe hinzugefügt!`
+      );
     }, 2000);
   });
 
